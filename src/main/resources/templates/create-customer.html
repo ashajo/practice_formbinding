@@ -1,10 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create New Customer</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 <body>
+<div class="nav-wrapper">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" th:href="@{/customers}">Customers</a>
+        </div>
+        <a class="navbar-brand" th:href="@{/customer/create}">Create New Customer</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+</div>
+<div class="page-wrapper">
+    <div class="container">
+        <form th:action="@{/customer/process}" th:object="${customerForm}" method="post">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail">Email</label>
+                    <input type="email" class="form-control" id="inputEmail" th:field="*{email}" required>
+                    <ul class="error" th:if="${#fields.hasErrors('email')}">
+                        <li th:each="err : ${#fields.errors('email')}">
+                            <span th:text="${err}"></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="inputCity">City</label>
+                    <input type="text" class="form-control" id="inputCity"  th:field="*{city}">
+                    <ul class="error" th:if="${#fields.hasErrors('city')}">
+                        <li th:each="err : ${#fields.errors('city')}">
+                            <span th:text="${err}"></span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputZip">Zip</label>
+                    <input type="text" step="1" class="form-control" id="inputZip" th:field="*{zipCode}">
+                    <ul class="error" th:if="${#fields.hasErrors('zipCode')}">
+                        <li th:each="err : ${#fields.errors('zipCode')}">
+                            <span th:text="${err}"></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="homeNumber">Home phone</label>
+                    <input type="tel" class="form-control" id="homeNumber" th:field="*{homePhone}">
+                    <ul class="error" th:if="${#fields.hasErrors('homePhone')}">
+                        <li th:each="err : ${#fields.errors('homePhone')}">
+                            <span th:text="${err}"></span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="cellNumber">Cell phone</label>
+                    <input type="tel" class="form-control" id="cellNumber" th:field="*{cellPhone}">
+                    <ul class="error" th:if="${#fields.hasErrors('cellPhone')}">
+                        <li th:each="err : ${#fields.errors('cellPhone')}">
+                            <span th:text="${err}"></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-secondary">Create</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>

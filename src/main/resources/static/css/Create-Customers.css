@@ -1,0 +1,35 @@
+.nav-wrapper{
+    margin-bottom: 25px;
+}
+
+.page-wrapper{
+   margin-left: 32vw;
+}
+
+/* Chromium */
+input ::-webkit-inner-spin-button,
+input ::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+/* FireFox */
+input {
+    -moz-appearance: textfield;
+}
+
+.error{
+    height: 20px;
+    padding: 0;
+    margin: 0;
+    font-weight: normal;
+    font-size: smaller;
+    color: red;
+    font-family: sans-serif;
+}
+
+.error li{
+    list-style: none;
+}

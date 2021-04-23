@@ -1,10 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Customers</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 <body>
+<div class="nav-wrapper">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" th:href="@{/customers}">Customers</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" th:href="@{/customer/create}">Create New Customer</a>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="page-wrapper">
+    <div class="container">
+        <div th:if="${customers.isEmpty()}">
+            <p>No Customers registered</p>
+        </div>
+        <div class="table-container" th:unless="${customers.isEmpty()}">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Registration Date</th>
+                    <th scope="col">Active</th>
+                    <th scope="col">Details</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="customer: ${customers}">
+                    <td><span th:text="${customer.customerId}"></span></td>
+                    <td><span th:text="${customer.email}"></span></td>
+                    <td><span th:text="${customer.getRegDate()}"></span></td>
+                    <td><span th:text="${customer.active}"></span></td>
+                    <td> <a class="btn btn-success btn-sm" th:href="@{customer/details(id=${customer.customerId})}">details</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
