@@ -17,7 +17,6 @@ public class CustomerDetails {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID",strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(nullable = false)
     private String detailsId;
     @NotNull
     private String street;

@@ -19,7 +19,6 @@ public class Customer {
     @Column(nullable = false)
     @NotNull
     private String customerId;
-    @Email(message = "Email format not valid")
     @NotNull
     private String email;
     @CreationTimestamp

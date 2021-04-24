@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import se.lexicon.practice_formbinding.data.CustomerDao;
 import se.lexicon.practice_formbinding.dto.CustomerFormDto;
 import se.lexicon.practice_formbinding.entity.Customer;
@@ -39,13 +40,7 @@ public class CustomerController {
 
 
     @PostMapping("customer/process")
-    public String create(@Valid @ModelAttribute("customerForm")CustomerFormDto customerFormDto, BindingResult bindingResult) {
-        if (customerDao.findByEmail(customerFormDto.getEmail()).isPresent()) {
-            FieldError error = new FieldError("customerForm", "email", "Email:"+customerFormDto.getAdress()+
-                    "is already defined");
-
-            bindingResult.addError(error);
-        }
+    public String create(@Valid @ModelAttribute("customerForm")CustomerFormDto customerFormDto, BindingResult bindingResult, RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors()) {
             return "create-customer";
         }

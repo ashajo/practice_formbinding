@@ -1,11 +1,24 @@
 package se.lexicon.practice_formbinding.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+
 public class CustomerFormDto {
+    @NotEmpty(message = "Field cannot be empty")
+    @Email(message = "Specified email address is not valid")
     private String email;
-    private String adress;
+    @Pattern(regexp = "CITY_VALIDATION_PATTERN",
+            message = "VALID_CITY_NAME")
     private String city;
+    @Pattern(regexp =" SWEDISH_ZIPCODE_PATTERN",
+            message = "SWEDISH_ZIPCODE_FORMAT")
     private String zipCode;
+    @Pattern(regexp =" SWEDISH_PHONE_NUMBER_PATTERN",
+            message = "PHONE_FORMAT_MESSAGE")
     private String homePhone;
+    @Pattern(regexp = "SWEDISH_CELLPHONE_NUMBER",
+            message = "CELLPHONE_FORMAT_MESSAGE")
     private String cellPhone;
 
     public String getEmail() {
@@ -14,14 +27,6 @@ public class CustomerFormDto {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getAdress() {
-        return adress;
-    }
-
-    public void setAdress(String adress) {
-        this.adress = adress;
     }
 
     public String getCity() {
@@ -55,16 +60,11 @@ public class CustomerFormDto {
     public void setCellPhone(String cellPhone) {
         this.cellPhone = cellPhone;
     }
+
     public String checkCityIsEmpty(String city){
         if (city.isEmpty()){
             return this.city="Unknown";
         }
         return this.city;
-    }
-    public String checkAdressIsEmpty(String adress){
-        if (adress.isEmpty()){
-            return this.adress="Unknown";
-        }
-        return this.adress;
     }
 }
